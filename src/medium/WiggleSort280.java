@@ -1,6 +1,6 @@
 package medium;
 //a little stupid with duplicate codes
-public class WigglySort280 {
+public class WiggleSort280 {
     int p1, p2, temp;//pointers
     boolean three;//for even length, after divide by 2 is even or odd is different
     private void wiggleSortEven(int[] nums, int p1, int p2, boolean three) {
