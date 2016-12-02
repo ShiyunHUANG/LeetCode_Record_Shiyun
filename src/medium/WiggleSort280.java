@@ -1,4 +1,7 @@
 package medium;
+
+import java.util.Arrays;
+
 //a little stupid with duplicate codes
 public class WiggleSort280 {
     int p1, p2, temp;//pointers
