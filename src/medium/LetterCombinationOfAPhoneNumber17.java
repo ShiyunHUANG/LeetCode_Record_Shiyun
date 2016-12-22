@@ -48,6 +48,12 @@ public class LetterCombinationOfAPhoneNumber17 {
         res.add(1);
 //        res.get(0)++;//invalid
         res.set(0, res.get(0) + 1);
+        for(int i : res) {
+            i++;//nothing change
+        }
+        for(int i = 0; i < res.size(); i++) {
+            
+        }
         System.out.println(res);
     }
 
