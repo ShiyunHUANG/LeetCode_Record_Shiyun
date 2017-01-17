@@ -30,6 +30,30 @@ class TreeNode {
      TreeNode(int x) { val = x; }
 }
 public class FlattenBinaryTreeToLinkedList114 {
+    /**17-Jan-16*/
+    TreeNode tmp;//points to the place for new connection
+    public void flatten(TreeNode root) {
+        if(root == null) return;
+        //start recur, put all nodes on the left tree first
+        tmp = root;
+        dfs(tmp, root.left);
+        dfs(tmp, root.right);
+        //rotate symmetrically
+        TreeNode curr = root;
+        while(curr.left != null) {
+            curr.right = curr.left;
+            curr.left = null;
+            curr = curr.right;
+        }
+    }
+    private void dfs(TreeNode root, TreeNode node) {
+        if(node == null) return;
+        root.left = node;
+        tmp = node;
+        dfs(tmp, node.left);
+        dfs(tmp, node.right);
+    }
+    /**16-Sept-13*/
     public void flatten(TreeNode root) {
         /*
          * Find the last branch on the left.
