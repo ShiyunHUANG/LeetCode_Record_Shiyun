@@ -54,7 +54,7 @@ public class FlattenBinaryTreeToLinkedList114 {
         dfs(tmp, node.right);
     }
     /**16-Sept-13*/
-    public void flatten(TreeNode root) {
+    public void flatten2(TreeNode root) {
         /*
          * Find the last branch on the left.
          */
