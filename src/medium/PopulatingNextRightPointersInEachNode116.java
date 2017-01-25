@@ -18,7 +18,7 @@ public class PopulatingNextRightPointersInEachNode116 {
             TreeLinkNode curr = levelStart;
             while(curr != null) {
                 if(curr.left != null) curr.left.next = curr.right;
-                if(curr.right != null && cur.next!=null) curr.right.next = curr.next.left; //!!!remember && cur.next!=null
+                if(curr.right != null && curr.next!=null) curr.right.next = curr.next.left; //!!!remember && cur.next!=null
                 curr = curr.next;
             }
             levelStart = levelStart.left;
