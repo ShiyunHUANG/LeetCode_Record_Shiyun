@@ -5,12 +5,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * DFS
  * @author Shiyun Huang
  *
  */
 public class BinaryTreeLevelOrderTraversal102 {
+    
+    /*Feb 5 2017*/
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        bfs(res, root, 0);
+        return res;
+    }
+    private void bfs(List<List<Integer>> res, TreeNode node, int level) {
+        if(node == null) return;
+        int size = res.size();
+        if(level >= size) res.add(new ArrayList<Integer>());//!!!
+        res.get(level).add(node.val);//Index the level and add the node to the right level
+        bfs(res, node.left, level + 1);
+        bfs(res, node.right, level + 1);
+    }
+    
+    
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList <List<Integer>>();
         HashMap<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();//key-level, value-List of nodes in that level

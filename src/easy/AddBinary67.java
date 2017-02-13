@@ -1,6 +1,54 @@
 package easy;
 
 public class AddBinary67 {
+    //second time 1/29/2017
+    public String addBinary2(String a, String b) {
+        StringBuilder sb = new StringBuilder("");
+        int p1 = a.length() - 1, p2 = b.length() - 1, carry = 0;
+        while(p1 >= 0 && p2 >= 0) {
+            char ch1 = a.charAt(p1);
+            char ch2 = b.charAt(p2);
+            int sum = ch1 - '0' + ch2 - '0' + carry;
+            if(sum >= 2) {
+                carry = sum / 2;
+                sb.insert(0, sum % 2);
+            } else {
+                sb.insert(0, sum);
+                carry = 0;
+            }
+            p1--;
+            p2--;
+        }
+        if(p1 >= 0 || p2 >= 0) {
+            int p;
+            String s;
+            if(p1 >= 0) {
+                p = p1;
+                s = a;
+            } else {
+                p = p2;
+                s = b;
+            }
+            while(p >= 0) {
+                int sum = s.charAt(p) - '0' + carry;
+                if(sum >= 2) {
+                    carry = sum / 2;
+                    sb.insert(0, sum % 2);
+                } else {
+                    sb.insert(0, sum);
+                    carry = 0;
+                }
+                p--;
+            }
+        } 
+        while(carry > 0) {
+            sb.insert(0, 1);
+            carry--;
+        }
+        return sb.toString();
+    }
+    
+    //first time 10/18/2016
     public String addBinary(String a, String b) {
         int lengthA = a.length();
         int lengthB = b.length();

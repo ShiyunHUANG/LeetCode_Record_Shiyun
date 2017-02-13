@@ -1,25 +1,77 @@
 package medium;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WordBreak139 {
     //s can use wordDict element more than once
     //s and wordDict are non-empty
     
     
-    /**Others DP solution*/
+    /**DP solution*/
     public boolean wordBreak2(String s, List<String> wordDict) {
-        boolean dp[] = new boolean[s.length() + 1];
-        dp[0] = true;
-        for(int i = 1; i <= s.length(); i++) {
-            for(int j = i - 1; j >= 0; j--) {
+        if(s == null || s.length() == 0) return false;
+        int len = s.length();
+        boolean[] dp = new boolean[len + 1]; //!!!len + 1 not length
+        dp[0] = true; //substring nothing
+        for(int i = 1; i <= len; i++) {
+            for(int j = 0; j < i; j++) {
                 if(dp[j] && wordDict.contains(s.substring(j, i))) {
                     dp[i] = true;
                     break;
                 }
             }
         }
-        return dp[s.length()];
+        return dp[len];
+        
+    }
+    /*My cant pass corner case solution*/
+    private boolean res = false;
+    public boolean wordBreak3(String s, List<String> wordDict) {
+        if(s == null || s.length() == 0) return false;
+        Map<Integer, Map<Integer, Boolean>> map = new HashMap<>(); //1st idx, 2nd index, inDict?
+        dfs(0, 1, s, wordDict, map);
+        return res;
+    }
+    private void 
+    dfs(int start, int end, String s, List<String> dict, Map<Integer, Map<Integer, Boolean>> map) {
+        if(start == s.length()) {
+            res = true;
+            return;
+        }
+        if(end > s.length()) return;
+        if(validate(start, end, map, dict, s)) dfs(end, end + 1, s, dict, map);
+        else dfs(start, end + 1, s, dict, map);
+    }
+    private boolean validate
+    (int start, int end, Map<Integer, Map<Integer, Boolean>> map, List<String> dict, String s) {
+        if(map.containsKey(start)) {
+            Map<Integer, Boolean> inner = map.get(start);
+            if(inner.containsKey(end)) {
+                return inner.get(end);
+            }
+            else {
+                if(dict.contains(s.substring(start, end))) {
+                    inner.put(end, true);
+                    return true;
+                } else {
+                    inner.put(end, false);
+                    return false;
+                }
+            }
+        } else {
+            Map<Integer, Boolean> inner = new HashMap<>();
+            if(dict.contains(s.substring(start, end))) {
+                inner.put(end, true);
+                map.put(start, inner);
+                return true;
+            } else {
+                inner.put(end, false);    
+                map.put(start, inner);
+                return false;
+            }
+        }
     }
     /**My TLE solution*/
     int len;
